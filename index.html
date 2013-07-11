@@ -24,6 +24,6 @@
       <span id="zero" class="next"></span>
       <span id="one" class="next"></span>
     </div>
+  <script src="index.js">(function(){var game,goalEl,input,level,oneEl,round,start,trigram,zeroEl;goalEl=document.getElementById("goal");zeroEl=document.getElementById("zero");oneEl=document.getElementById("one");trigram=["☰","☴","☲","☶","☱","☵","☳","☷"];level=100;round=function(value,goal,cursor){if(cursor==null){cursor=0}return{value:value,goal:goal,cursor:cursor,next:cursor>2?value===goal:function(b){return round(value|b<<cursor,goal,cursor+1)}}};game=function(r){if(typeof r.next==="function"){return input(r,function(b){return game(r.next(b))})}else{level+=r.next?-10:10;document.body.style.fontSize=level+"vw";return start()}};input=function(r,fn){goal.textContent=trigram[r.goal];zeroEl.textContent=trigram[r.value];oneEl.textContent=trigram[r.value|1<<r.cursor];zeroEl.onclick=function(){return fn(0)};return oneEl.onclick=function(){return fn(1)}};(start=function(){return game(round(0,Math.random()*8|0))})()}).call(this);</script>
   </body>
-  <script src="index.js"></script>
 </html>
